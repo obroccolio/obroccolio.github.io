@@ -1,0 +1,767 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Junxiang">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="创建一个新的文件你可以执行下列命令来创建一篇新文章或者新的页面。 1$ hexo new [layout] &lt;title&gt; post是默认的布局，但你也可以提供自己的布局。 您可以通过编辑 _config.yml 中的 default_layout 设置来更改默认布局。 布局_Layout Hexo 有三种默认布局：post、page 和 draft。 每个布局创建的文件会被保存到不同">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo渲染器的部分语法以及移植注意事项">
+<meta property="og:url" content="http://me.broccoli.me/2025/08/16/site/index.html">
+<meta property="og:site_name" content="Broccoli">
+<meta property="og:description" content="创建一个新的文件你可以执行下列命令来创建一篇新文章或者新的页面。 1$ hexo new [layout] &lt;title&gt; post是默认的布局，但你也可以提供自己的布局。 您可以通过编辑 _config.yml 中的 default_layout 设置来更改默认布局。 布局_Layout Hexo 有三种默认布局：post、page 和 draft。 每个布局创建的文件会被保存到不同">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-08-16T14:45:56.000Z">
+<meta property="article:modified_time" content="2025-08-17T07:53:44.561Z">
+<meta property="article:author" content="Junxiang">
+<meta property="article:tag" content="Markdown">
+<meta property="article:tag" content="Nodejs">
+<meta property="article:tag" content="Web">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Hexo渲染器的部分语法以及移植注意事项 - Broccoli</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_5000870_i9gw46ashyn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"me.broccoli.me","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Broccoli</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Hexo渲染器的部分语法以及移植注意事项"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Junxiang
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-08-16 22:45" pubdate>
+          2025年8月16日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          10 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Hexo渲染器的部分语法以及移植注意事项</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="创建一个新的文件"><a href="#创建一个新的文件" class="headerlink" title="创建一个新的文件"></a>创建一个新的文件</h2><p>你可以执行下列命令来创建一篇新文章或者新的页面。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new [layout] &lt;title&gt;<br></code></pre></td></tr></table></figure>
+<p>post是默认的布局，但你也可以提供自己的布局。 您可以通过编辑 _config.yml 中的 default_layout 设置来更改默认布局。</p>
+<h3 id="布局-Layout"><a href="#布局-Layout" class="headerlink" title="布局_Layout"></a>布局_Layout</h3><hr>
+<p>Hexo 有三种默认布局：<code>post</code>、<code>page</code> 和 <code>draft</code>。 每个布局创建的文件会被保存到不同的路径。 新创建的帖子被保存到 <code>source/_post</code> 文件夹。</p>
+<table><thead><tr><th>布局</th><th>路径</th></tr></thead><tbody><tr><td><code>post</code></td><td><code>source/_posts</code></td></tr><tr><td><code>page</code></td><td><code>source</code></td></tr><tr><td><code>draft</code></td><td><code>source/_drafts</code></td></tr></tbody></table>
+
+<blockquote>
+<p><strong>禁用布局</strong></p>
+<p>如果你不希望一篇文章（post&#x2F;page）使用主题处理，请在它的 front-matter 中设置 <code>layout: false</code>。 </p>
+</blockquote>
+<h3 id="文件名称"><a href="#文件名称" class="headerlink" title="文件名称"></a>文件名称</h3><hr>
+<p>默认情况下，Hexo 使用帖子标题作为其文件名。 您可以编辑 <code>_config.yml</code> 中的 <code>new_post_name</code> 设置去更改默认文件名。 例如， <code>:year-:month-:day-:title.md</code> 将在文件名前加上创建日期。 你可以使用以下占位符：</p>
+<table><thead><tr><th>占位符</th><th>描述</th></tr></thead><tbody><tr><td><code>:title</code></td><td>标题（小写，空格将会被替换为短杠）</td></tr><tr><td><code>:year</code></td><td>建立的年份，比如， <code>2015</code></td></tr><tr><td><code>:month</code></td><td>建立的月份（有前导零），比如， <code>04</code></td></tr><tr><td><code>:i_month</code></td><td>建立的月份（无前导零），比如， <code>4</code></td></tr><tr><td><code>:day</code></td><td>建立的日期（有前导零），比如， <code>07</code></td></tr><tr><td><code>:i_day</code></td><td>建立的日期（无前导零），比如， <code>7</code></td></tr></tbody></table>
+
+<h3 id="草稿"><a href="#草稿" class="headerlink" title="草稿"></a>草稿</h3><hr>
+<p>之前，我们在提到了 Hexo 中的一个特殊的布局：<code>draft</code>。 使用此布局初始化的帖子将被保存到 <code>source/_drafts</code> 文件夹中。 您可以使用 <code>发布</code> 命令将草稿移动到 <code>source/_posts</code> 文件夹。 <code>publish</code> 工作方式类似于 <code>new</code> 命令。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml">$ hexo publish [layout] <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>默认情况下不显示草稿 您可以在运行 Hexo 时添加 <code>--draft</code> 选项或在 <code>_config.yml</code> 启用 <code>render_draft</code> 设置来渲染草稿。</p>
+<h3 id="脚手架"><a href="#脚手架" class="headerlink" title="脚手架"></a>脚手架</h3><hr>
+<p>在新建文章时，Hexo 会根据 <code>scaffolds</code> 文件夹内相对应的文件来建立文件。 例如：</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs actionscript">$ hexo <span class="hljs-keyword">new</span> photo <span class="hljs-string">&quot;My Gallery&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>在执行这行指令时，Hexo 会尝试在 <code>scaffolds</code> 文件夹中寻找 <code>photo.md</code>，并根据其内容建立文章。 以下是您可以在模版中使用的变量：</p>
+<table><thead><tr><th>占位符</th><th>描述</th></tr></thead><tbody><tr><td><code>layout</code></td><td>布局</td></tr><tr><td><code>title</code></td><td>标题</td></tr><tr><td><code>date</code></td><td>文件建立日期</td></tr></tbody></table>
+
+<h3 id="支持的格式"><a href="#支持的格式" class="headerlink" title="支持的格式"></a>支持的格式</h3><hr>
+<p>Hexo 支持以任何格式书写文章，只要安装了相应的渲染插件。</p>
+<p>例如，Hexo 默认安装了 <code>hexo-renderer-marked</code> 和 <code>hexo-renderer-ejs</code>，因此你不仅可以用 Markdown 写作，你还可以用 EJS 写作。 如果你安装了 <code>hexo-renderer-pug</code>，你甚至可以用 Pug 模板语言书写文章。</p>
+<p>只需要将文章的扩展名从 <code>md</code> 改成 <code>ejs</code>，Hexo 就会使用 <code>hexo-renderer-ejs</code> 渲染这个文件，其他格式同理。</p>
+<h2 id="Front-matter"><a href="#Front-matter" class="headerlink" title="Front-matter"></a>Front-matter</h2><blockquote>
+<p>Front-matter 是文件开头的 YAML 或 JSON 代码块，用于配置写作设置。</p>
+</blockquote>
+<p>Front-matter 是文件开头的 YAML 或 JSON 代码块，用于配置写作设置。 以 YAML 格式书写时，Front-matter 以三个破折号结束；以 JSON 格式书写时，Front-matter 以三个分号结束。</p>
+<p><strong>YAML</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-meta">---</span><br><span class="hljs-attr">title:</span> <span class="hljs-string">Hello</span> <span class="hljs-string">World</span><br><span class="hljs-attr">date:</span> <span class="hljs-number">2013</span><span class="hljs-string">/7/13</span> <span class="hljs-number">20</span><span class="hljs-string">:46:25</span><br><span class="hljs-meta">---</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>JSON</strong></p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs llvm"><span class="hljs-string">&quot;title&quot;</span>: <span class="hljs-string">&quot;Hello World&quot;</span><span class="hljs-punctuation">,</span><br><span class="hljs-string">&quot;date&quot;</span>: <span class="hljs-string">&quot;2013/7/13 20:46:25&quot;</span><br><span class="hljs-comment">;;;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="设置-默认值"><a href="#设置-默认值" class="headerlink" title="设置 &amp; 默认值"></a><a href="#%E8%AE%BE%E7%BD%AE-%E9%BB%98%E8%AE%A4%E5%80%BC" title="设置 &amp; 默认值"></a>设置 &amp; 默认值<a href="#%E8%AE%BE%E7%BD%AE-%E9%BB%98%E8%AE%A4%E5%80%BC"></a></h3><table><thead><tr><th>设置</th><th>描述</th><th>默认值</th></tr></thead><tbody><tr><td><code>layout</code></td><td>布局</td><td><a target="_blank" rel="noopener" href="https://hexo.io/docs/configuration#Writing"><code>config.default_layout</code></a></td></tr><tr><td><code>title</code></td><td>标题</td><td>文章的文件名</td></tr><tr><td><code>date</code></td><td>建立日期</td><td>文件建立日期</td></tr><tr><td><code>updated</code></td><td>更新日期</td><td>文件更新日期</td></tr><tr><td><code>comments</code></td><td>开启文章的评论功能</td><td><code>true</code></td></tr><tr><td><code>tags</code></td><td>标签（不适用于分页）</td><td></td></tr><tr><td><code>categories</code></td><td>分类（不适用于分页）</td><td></td></tr><tr><td><code>permalink</code></td><td>覆盖文章的永久链接. 永久链接应该以 <code>/</code> 或 <code>.html</code> 结尾</td><td><code>null</code></td></tr><tr><td><code>excerpt</code></td><td>纯文本的页面摘要。 使用 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/tag-plugins#%E6%96%87%E7%AB%A0%E6%91%98%E8%A6%81%E5%92%8C%E6%88%AA%E6%96%AD">该插件</a> 来格式化文本</td><td></td></tr><tr><td><code>disableNunjucks</code></td><td>启用时禁用 Nunjucks 标签 <code>&#123;&#123; &#125;&#125;</code>/<code>&#123;% %&#125;</code> 和 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/tag-plugins">标签插件</a> 的渲染功能</td><td>false</td></tr><tr><td><code>lang</code></td><td>设置语言以覆盖 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/internationalization#%E8%B7%AF%E5%BE%84">自动检测</a></td><td>继承自 <code>_config.yml</code></td></tr><tr><td><code>published</code></td><td>文章是否发布</td><td>对于 <code>_posts</code> 下的文章为 <code>true</code>，对于 <code>_draft</code> 下的文章为 <code>false</code></td></tr></tbody></table>
+
+<h4 id="布局"><a href="#布局" class="headerlink" title="布局"></a><a href="#%E5%B8%83%E5%B1%80" title="布局"></a>布局<a href="#%E5%B8%83%E5%B1%80"></a></h4><p>根据 <code>_config.yml</code> 中 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/configuration#%E6%96%87%E7%AB%A0"><code>default_layout</code></a> 的设置，默认布局是 <code>post</code> 。 当文章中的布局被禁用 (<code>layout: false</code>)，它将不会使用主题处理。 然而，它仍然会被任何可用的渲染引擎渲染：如果一篇文章是用 Markdown 写的，并且安装了 Markdown 渲染引擎（比如默认的 <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo-renderer-marked">hexo-renderer-marked</a>)，它将被渲染成 HTML。</p>
+<p>除非通过 <code>disableNunjucks</code> 设置或 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/api/renderer#%E7%A6%81%E7%94%A8-Nunjucks-%E6%A0%87%E7%AD%BE">渲染引擎</a> 禁用，否则无论布局如何，<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/tag-plugins">标签插件</a> 总是被处理。</p>
+<h4 id="分类和标签"><a href="#分类和标签" class="headerlink" title="分类和标签"></a><a href="#%E5%88%86%E7%B1%BB%E5%92%8C%E6%A0%87%E7%AD%BE" title="分类和标签"></a>分类和标签<a href="#%E5%88%86%E7%B1%BB%E5%92%8C%E6%A0%87%E7%AD%BE"></a></h4><p>只有文章支持分类和标签。 分类按顺序应用于文章，从而形成分类和子分类的层次结构。 标签是在相同的层次结构上定义的，因此它们的出现顺序不重要。</p>
+<p><strong>示例</strong></p>
+<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs subunit">categories:<br>  - Sports<br>  - Baseball<br><span class="hljs-keyword">tags:</span><br>  - Injury<br>  - Fight<br>  - Shocking<br></code></pre></td></tr></table></figure>
+
+<p>如果你想应用多个分类层次结构，请使用一个名称列表而不是一个单个名称。 如果 Hexo 在帖子上看到像这种方式定义的分类，它会将该帖子的每个分类视为其自己的独立层次结构。</p>
+<p><strong>示例</strong></p>
+<figure class="highlight nestedtext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs nestedtext"><span class="hljs-attribute">categories</span><span class="hljs-punctuation">:</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">[Sports, Baseball]</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">[MLB, American League, Boston Red Sox]</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">[MLB, American League, New York Yankees]</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">Rivalries</span><br></code></pre></td></tr></table></figure>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8Web%E5%BC%80%E5%8F%91/" class="category-chain-item">浏览器Web开发</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Markdown/" class="print-no-link">#Markdown</a>
+      
+        <a href="/tags/Nodejs/" class="print-no-link">#Nodejs</a>
+      
+        <a href="/tags/Web/" class="print-no-link">#Web</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Hexo渲染器的部分语法以及移植注意事项</div>
+      <div>http://me.broccoli.me/2025/08/16/site/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Junxiang</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年8月16日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/12/21/6.%E6%89%BE%E5%8D%95%E7%8B%AC%E7%9A%84%E6%95%B0%E3%80%90%E5%BC%82%E6%88%96%E8%BF%90%E7%AE%97%E3%80%91/" title="好题好代码-6.找单独的数【异或运算】">
+                        <span class="hidden-mobile">好题好代码-6.找单独的数【异或运算】</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a>Broccoli Github Page</a> <i class="iconfont icon-love"></i> <a>Based on</a> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <a>&</a> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

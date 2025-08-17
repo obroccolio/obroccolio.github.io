@@ -1,0 +1,1170 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Junxiang">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Broccoli用于代码知识库等的存放点">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Broccoli">
+<meta property="og:url" content="http://me.broccoli.me/index.html">
+<meta property="og:site_name" content="Broccoli">
+<meta property="og:description" content="Broccoli用于代码知识库等的存放点">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Junxiang">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Broccoli</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_5000870_i9gw46ashyn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"me.broccoli.me","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 100vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Broccoli</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Broccoli的现代化学习路径门户"></span>
+          
+        </div>
+
+        
+      </div>
+
+      
+        <div class="scroll-down-bar">
+          <i class="iconfont icon-arrowdown"></i>
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div id="board"
+          style="margin-top: 0">
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<!-- 自定义首页内容区域 -->
+
+  <div class="row mx-auto custom-content-section">
+    <div class="col-12">
+      <div class="custom-content-container">
+
+        <!-- 编程语言一览 -->
+        
+          <div class="programming-languages-section mb-4">
+            <h3 class="section-title">
+              <i class="iconfont icon-code"></i>
+              编程语言一览
+            </h3>
+            <div class="languages-grid">
+              
+                <div class="language-item">
+                  
+                    <i class="iconfont icon-Python"></i>
+                  
+                  
+                    <a href="/categories/Python/" target="_self">
+                      Python
+                    </a>
+                  
+                  
+                    <small class="text-muted d-block">数据科学与机器学习</small>
+                  
+                </div>
+              
+                <div class="language-item">
+                  
+                    <i class="iconfont icon-javascript"></i>
+                  
+                  
+                    <a href="/categories/JavaScript/" target="_self">
+                      JavaScript
+                    </a>
+                  
+                  
+                    <small class="text-muted d-block">前端开发与Node.js</small>
+                  
+                </div>
+              
+                <div class="language-item">
+                  
+                    <i class="iconfont icon-java"></i>
+                  
+                  
+                    <a href="/categories/Java/" target="_self">
+                      Java/Kotlin
+                    </a>
+                  
+                  
+                    <small class="text-muted d-block">企业级应用开发</small>
+                  
+                </div>
+              
+                <div class="language-item">
+                  
+                    <i class="iconfont icon-cplusplus"></i>
+                  
+                  
+                    <a href="/categories/C++/" target="_self">
+                      C++
+                    </a>
+                  
+                  
+                    <small class="text-muted d-block">系统编程与算法</small>
+                  
+                </div>
+              
+                <div class="language-item">
+                  
+                    <i class="iconfont icon-markdown"></i>
+                  
+                  
+                    <a href="/categories/Markdown/" target="_self">
+                      Markdown
+                    </a>
+                  
+                  
+                    <small class="text-muted d-block">技术文档与笔记</small>
+                  
+                </div>
+              
+                <div class="language-item">
+                  
+                    <i class="iconfont icon-c"></i>
+                  
+                  
+                    <a href="/categories/c/" target="_self">
+                      C
+                    </a>
+                  
+                  
+                    <small class="text-muted d-block">嵌入式开发</small>
+                  
+                </div>
+              
+            </div>
+          </div>
+        
+
+        <!-- 项目一览 -->
+        
+          <div class="projects-section mb-4">
+            <h3 class="section-title">
+              <i class="iconfont icon-folder"></i>
+              项目一览
+            </h3>
+            <div class="projects-grid">
+              
+                <div class="project-item">
+                  <div class="project-header">
+                    
+                      <i class="iconfont icon-blog"></i>
+                    
+                    
+                      <a href="https://github.com/obroccolio/Hexo" target="_blank">
+                        <h4>个人博客系统</h4>
+                      </a>
+                    
+                  </div>
+                  
+                    <p class="project-description">基于Hexo构建的现代化博客平台，支持多主题切换和插件扩展</p>
+                  
+                  
+                    <div class="tech-stack">
+                      
+                        <span class="tech-tag">Hexo</span>
+                      
+                        <span class="tech-tag">JavaScript</span>
+                      
+                        <span class="tech-tag">CSS</span>
+                      
+                        <span class="tech-tag">Markdown</span>
+                      
+                    </div>
+                  
+                </div>
+              
+                <div class="project-item">
+                  <div class="project-header">
+                    
+                      <i class="iconfont icon-note"></i>
+                    
+                    
+                      <a href="/archives/" target="_self">
+                        <h4>学习笔记管理</h4>
+                      </a>
+                    
+                  </div>
+                  
+                    <p class="project-description">整理和分享编程学习过程中的知识点和经验总结</p>
+                  
+                  
+                    <div class="tech-stack">
+                      
+                        <span class="tech-tag">Markdown</span>
+                      
+                        <span class="tech-tag">Git</span>
+                      
+                        <span class="tech-tag">Documentation</span>
+                      
+                    </div>
+                  
+                </div>
+              
+                <div class="project-item">
+                  <div class="project-header">
+                    
+                      <i class="iconfont icon-code"></i>
+                    
+                    
+                      <a href="/categories/%E9%A1%B9%E7%9B%AE/" target="_self">
+                        <h4>代码实践项目</h4>
+                      </a>
+                    
+                  </div>
+                  
+                    <p class="project-description">各种编程语言的实践项目和算法实现</p>
+                  
+                  
+                    <div class="tech-stack">
+                      
+                        <span class="tech-tag">多语言</span>
+                      
+                        <span class="tech-tag">算法</span>
+                      
+                        <span class="tech-tag">数据结构</span>
+                      
+                    </div>
+                  
+                </div>
+              
+            </div>
+          </div>
+        
+
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2025/08/16/site/" target="_self">
+          Hexo渲染器的部分语法以及移植注意事项
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/08/16/site/" target="_self">
+        <div>
+          创建一个新的文件你可以执行下列命令来创建一篇新文章或者新的页面。 1$ hexo new [layout] &lt;title&gt; post是默认的布局，但你也可以提供自己的布局。 您可以通过编辑 _config.yml 中的 default_layout 设置来更改默认布局。 布局_Layout Hexo 有三种默认布局：post、page 和 draft。 每个布局创建的文件会被保存到不同
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-08-16 22:45" pubdate>
+              2025-08-16
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8Web%E5%BC%80%E5%8F%91/" class="category-chain-item">浏览器Web开发</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Markdown/">#Markdown</a>
+            
+              <a href="/tags/Nodejs/">#Nodejs</a>
+            
+              <a href="/tags/Web/">#Web</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/12/21/6.%E6%89%BE%E5%8D%95%E7%8B%AC%E7%9A%84%E6%95%B0%E3%80%90%E5%BC%82%E6%88%96%E8%BF%90%E7%AE%97%E3%80%91/" target="_self">
+          好题好代码-6.找单独的数【异或运算】
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/12/21/6.%E6%89%BE%E5%8D%95%E7%8B%AC%E7%9A%84%E6%95%B0%E3%80%90%E5%BC%82%E6%88%96%E8%BF%90%E7%AE%97%E3%80%91/" target="_self">
+        <div>
+          找单独的数【异或运算】问题描述在一个班级中，每位同学都拿到了一张卡片，上面有一个整数。有趣的是，除了一个数字之外，所有的数字都恰好出现了两次。现在需要你帮助班长小C快速找到那个拿了独特数字卡片的同学手上的数字是什么。 要求：  设计一个算法，使其时间复杂度为 O(n)，其中 n 是班级的人数。 尽量减少额外空间的使用，以体现你的算法优化能力。  测试样例样例1： 输入：cards = [1, 1,
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-12-21 11:18" pubdate>
+              2024-12-21
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%A5%BD%E9%A2%98%E5%A5%BD%E4%BB%A3%E7%A0%81/" class="category-chain-item">好题好代码</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/C/">#C++</a>
+            
+              <a href="/tags/Algorithm/">#Algorithm</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/12/17/howtoask/" target="_self">
+          提问的智慧
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/12/17/howtoask/" target="_self">
+        <div>
+          提问的智慧 文章转自Github  How To Ask Questions The Smart Way Copyright © 2001,2006,2014 Eric S. Raymond, Rick Moen 本指南英文版版权为 Eric S. Raymond, Rick Moen 所有。 原文网址 Copyleft 2001 by D.H.Grand(nOBODY&#x2F;Ginux),
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-12-17 15:48" pubdate>
+              2024-12-17
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Tools/" class="category-chain-item">Tools</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/12/02/5.%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84%E5%92%8C/" target="_self">
+          好题好代码-5.最大子数组和
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/12/02/5.%E6%9C%80%E5%A4%A7%E5%AD%90%E6%95%B0%E7%BB%84%E5%92%8C/" target="_self">
+        <div>
+          最大子数组和题目描述给你一个整数数组 nums ，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。 子数组是数组中的一个连续部分。 示例示例 1： 输入：nums &#x3D; [-2,1,-3,4,-1,2,1,-5,4] 输出：6  解释：连续子数组 [4,-1,2,1] 的和最大，为 6 。 示例 2： 输入：nums &#x3D; [1] 输出：1  示例 3：
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-12-02 21:32" pubdate>
+              2024-12-02
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%A5%BD%E9%A2%98%E5%A5%BD%E4%BB%A3%E7%A0%81/" class="category-chain-item">好题好代码</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/C/">#C++</a>
+            
+              <a href="/tags/Algorithm/">#Algorithm</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/12/02/3.N%E7%9A%87%E5%90%8E%E3%80%90%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E3%80%91/" target="_self">
+          好题好代码-3.n 皇后问题
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/12/02/3.N%E7%9A%87%E5%90%8E%E3%80%90%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E3%80%91/" target="_self">
+        <div>
+          n 皇后问题 回溯算法  按照国际象棋的规则，皇后可以攻击与之在同一行、同一列或同一斜线上的棋子。n 皇后问题研究的是如何将 n 个皇后放置在一个 n×n 的棋盘上，并且使皇后彼此之间不能相互攻击。 要求  给定一个整数 n，返回所有不同的 n 皇后问题的解决方案。每一种解法包含一个不同的 n 皇后问题的棋子放置方案，其中 ‘Q’ 和 ‘.’ 分别代表了皇后和空位。  示例  示例 1  输入：n
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-12-02 20:17" pubdate>
+              2024-12-02
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%A5%BD%E9%A2%98%E5%A5%BD%E4%BB%A3%E7%A0%81/" class="category-chain-item">好题好代码</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/C/">#C++</a>
+            
+              <a href="/tags/Algorithm/">#Algorithm</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/12/01/4.%E4%BD%BF%E6%95%B0%E7%BB%84%E4%B8%BA%E7%A9%BA%E7%9A%84%E6%9C%80%E5%B0%91%E6%93%8D%E4%BD%9C%E6%AC%A1%E6%95%B0/" target="_self">
+          好题好代码-4.使数组为空的最少操作次数
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/12/01/4.%E4%BD%BF%E6%95%B0%E7%BB%84%E4%B8%BA%E7%A9%BA%E7%9A%84%E6%9C%80%E5%B0%91%E6%93%8D%E4%BD%9C%E6%AC%A1%E6%95%B0/" target="_self">
+        <div>
+          4.使数组为空的最少操作次数题目给你一个下标从 0 开始的正整数数组 nums 。 你可以对数组执行以下两种操作任意次 ：  从数组中选择 两个 值 相等 的元素，并将它们从数组中 删除 。 从数组中选择 三个 值 相等 的元素，并将它们从数组中 删除 。 请你返回使数组为空的 最少 操作次数，如果无法达成，请返回 -1 。  示例 1： 输入：nums = [2,3,3,2,2,4,2,3,4]
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-12-01 19:21" pubdate>
+              2024-12-01
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%A5%BD%E9%A2%98%E5%A5%BD%E4%BB%A3%E7%A0%81/" class="category-chain-item">好题好代码</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/C/">#C++</a>
+            
+              <a href="/tags/Algorithm/">#Algorithm</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/12/01/2.%E5%A4%8D%E6%95%B0%E4%B9%98%E6%B3%95%E3%80%90Lambda%E5%87%BD%E6%95%B0%E3%80%91/" target="_self">
+          好题好代码-2. 复数乘法
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/12/01/2.%E5%A4%8D%E6%95%B0%E4%B9%98%E6%B3%95%E3%80%90Lambda%E5%87%BD%E6%95%B0%E3%80%91/" target="_self">
+        <div>
+          2. 复数乘法题目 复数 可以用字符串表示，遵循 “实部+虚部i” 的形式，并满足下述条件： 实部 是一个整数，取值范围是 [-100, 100] 虚部 也是一个整数，取值范围是 [-100, 100] i^2 &#x3D; -1 给你两个字符串表示的复数 num1 和 num2 ，请你遵循复数表示形式，返回表示它们乘积的字符串。  示例 1：  输入：num1 &#x3D; “1+1i”, nu
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-12-01 16:06" pubdate>
+              2024-12-01
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%A5%BD%E9%A2%98%E5%A5%BD%E4%BB%A3%E7%A0%81/" class="category-chain-item">好题好代码</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/C/">#C++</a>
+            
+              <a href="/tags/Algorithm/">#Algorithm</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/12/01/1.%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E5%8D%95%E8%AF%8D%E9%95%BF%E5%BA%A6%E3%80%90%E9%81%8D%E5%8E%86%E6%96%B9%E5%90%91%E3%80%91/" target="_self">
+          好题好代码-1. 最后一个单词的长度
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/12/01/1.%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E5%8D%95%E8%AF%8D%E9%95%BF%E5%BA%A6%E3%80%90%E9%81%8D%E5%8E%86%E6%96%B9%E5%90%91%E3%80%91/" target="_self">
+        <div>
+          1. 最后一个单词的长度题目 给你一个字符串 s，由若干单词组成，单词前后用一些空格字符隔开。返回字符串中 最后一个 单词的长度。 单词是指仅由字母组成、不包含任何空格字符的最大子字符串。  示例 1：  输入：s &#x3D; “Hello World” 输出：5 解释：最后一个单词是“World”，长度为 5。  示例 2：  输入：s &#x3D; “   fly me   to   the
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-12-01 16:02" pubdate>
+              2024-12-01
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%A5%BD%E9%A2%98%E5%A5%BD%E4%BB%A3%E7%A0%81/" class="category-chain-item">好题好代码</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/C/">#C++</a>
+            
+              <a href="/tags/Algorithm/">#Algorithm</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/11/29/Markdown%E4%BD%BF%E7%94%A8%E6%95%99%E5%AD%A6/" target="_self">
+          Makdown的使用方法
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/11/29/Markdown%E4%BD%BF%E7%94%A8%E6%95%99%E5%AD%A6/" target="_self">
+        <div>
+          手把手教会你使用 Markdown前言Markdown 是一种轻量级标记语言，通俗的说你记笔记写博客的时候不用管排版如何，只要将自己的内容写上去，Markdown 语法就可以给你搞定一切。 一、Markdown 是什么 Markdown 是一种轻量级标记语言，创始人为约翰 · 格鲁伯（John Gruber）。Markdown 允许人们使用易读易写的纯文本格式编写文档，然后转换成有效的 HTML
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-11-29 21:43" pubdate>
+              2024-11-29
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Markdown/" class="category-chain-item">Markdown</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Markdown/">#Markdown</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/11/24/Debug_Homework/" target="_self">
+          程序设计Debug作业
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/11/24/Debug_Homework/" target="_self">
+        <div>
+          （1）问题描述和错误代码 在本次作业中，错误代码从用户输入读取一个字符，如果这个整数在 0 到 9 之间，就输出对应的英文单词（如输入 5 则输出 “Five”）；如果输入的字符不是 0 到 9 中的数字字符，则输出 “Other”。代码中使用了一个字符串数组来存储数字 0 到 9 对应的英文单词，通过条件判断来确定输出内容。代码的初步实现存在逻辑错误和变量类型错误，导致输出的结果不符合预期。
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-11-24 18:57" pubdate>
+              2024-11-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" class="category-chain-item">程序设计</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/C/">#C++</a>
+            
+              <a href="/tags/Note/">#Note</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a>Broccoli Github Page</a> <i class="iconfont icon-love"></i> <a>Based on</a> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <a>&</a> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

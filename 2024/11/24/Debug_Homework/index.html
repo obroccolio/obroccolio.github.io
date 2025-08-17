@@ -1,0 +1,859 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Junxiang">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="（1）问题描述和错误代码 在本次作业中，错误代码从用户输入读取一个字符，如果这个整数在 0 到 9 之间，就输出对应的英文单词（如输入 5 则输出 “Five”）；如果输入的字符不是 0 到 9 中的数字字符，则输出 “Other”。代码中使用了一个字符串数组来存储数字 0 到 9 对应的英文单词，通过条件判断来确定输出内容。代码的初步实现存在逻辑错误和变量类型错误，导致输出的结果不符合预期。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="程序设计Debug作业">
+<meta property="og:url" content="http://me.broccoli.me/2024/11/24/Debug_Homework/index.html">
+<meta property="og:site_name" content="Broccoli">
+<meta property="og:description" content="（1）问题描述和错误代码 在本次作业中，错误代码从用户输入读取一个字符，如果这个整数在 0 到 9 之间，就输出对应的英文单词（如输入 5 则输出 “Five”）；如果输入的字符不是 0 到 9 中的数字字符，则输出 “Other”。代码中使用了一个字符串数组来存储数字 0 到 9 对应的英文单词，通过条件判断来确定输出内容。代码的初步实现存在逻辑错误和变量类型错误，导致输出的结果不符合预期。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/12641858/1731144361517-dcb46d7b-ab82-4c9b-a0bc-c8cccfd12d86.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/12641858/1731143857136-f0b8b82f-800b-4aaf-9cee-40d4cacea113.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/12641858/1731143857386-752e0f81-3110-48ce-bb96-865ec867c395.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/12641858/1731143857621-7b960fa6-19de-44b8-aa60-6c8802996fab.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/12641858/1731143857888-7aeb6f81-bf2f-44e0-83cd-50b61e3a5307.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/12641858/1731143858128-9dd9fbd0-959d-4462-a6f6-b560a2890c4c.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2024/png/12641858/1731143858811-7be39f35-154c-4dc0-bc75-a4b21df1fb7d.png">
+<meta property="article:published_time" content="2024-11-24T10:57:36.000Z">
+<meta property="article:modified_time" content="2025-08-17T07:53:27.768Z">
+<meta property="article:author" content="Junxiang">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="Note">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2024/png/12641858/1731144361517-dcb46d7b-ab82-4c9b-a0bc-c8cccfd12d86.png">
+  
+  
+  
+  <title>程序设计Debug作业 - Broccoli</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_5000870_i9gw46ashyn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"me.broccoli.me","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Broccoli</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="程序设计Debug作业"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-author" aria-hidden="true"></i>
+        Junxiang
+      </span>
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-11-24 18:57" pubdate>
+          2024年11月24日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          23 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">程序设计Debug作业</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="SuH4x">（1）问题描述和错误代码</h2>
+在本次作业中，错误代码从用户输入读取一个字符，如果这个整数在 0 到 9 之间，就输出对应的英文单词（如输入 5 则输出 “Five”）；如果输入的字符不是 0 到 9 中的数字字符，则输出 “Other”。代码中使用了一个字符串数组来存储数字 0 到 9 对应的英文单词，通过条件判断来确定输出内容。代码的初步实现存在逻辑错误和变量类型错误，导致输出的结果不符合预期。
+
+<p>题目要求：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/12641858/1731144361517-dcb46d7b-ab82-4c9b-a0bc-c8cccfd12d86.png" srcset="/img/loading.gif" lazyload></p>
+<p>错误代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> i;<br>    cin&gt;&gt;i;<br>    string num[]=&#123;<span class="hljs-string">&quot;Zero&quot;</span>,<span class="hljs-string">&quot;One&quot;</span>,<span class="hljs-string">&quot;Two&quot;</span>,<span class="hljs-string">&quot;Three&quot;</span>,<span class="hljs-string">&quot;Four&quot;</span>,<span class="hljs-string">&quot;Five&quot;</span>,<span class="hljs-string">&quot;Six&quot;</span>,<span class="hljs-string">&quot;Seven&quot;</span>,<span class="hljs-string">&quot;Eight&quot;</span>,<span class="hljs-string">&quot;Nine&quot;</span>&#125;;<br>    <span class="hljs-keyword">if</span>(i&gt;<span class="hljs-number">0</span>||i&lt;=<span class="hljs-number">9</span>)<br>        cout&lt;&lt;num[i];<br>    <span class="hljs-keyword">else</span><br>        cout&lt;&lt;<span class="hljs-string">&quot;Other&quot;</span>;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>代码在实现过程中存在以下几个问题：</p>
+<ol>
+<li>变量类型错误：代码错误的将输入数据存储的变量类型定义为整数（int）而忽略了其他字符输入的可能性。</li>
+<li>条件判断错误：If语句中的逻辑运算错误的使用了或运算（||），从而使得if语句的执行错误。</li>
+<li>比较符号错误：在0到9的条件中，左侧的0错误使用了大于号，使得等于0这一情况被忽略。</li>
+</ol>
+<h2 id="muR5p">（2）通过debug查错纠错</h2>
+通过调试器设置断点，并在代码运行时监视变量，我们发现了代码中的多个问题。以下是通过debug工具检查错误的步骤：
+
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/12641858/1731143857136-f0b8b82f-800b-4aaf-9cee-40d4cacea113.png" srcset="/img/loading.gif" lazyload></p>
+<p>在将代码复制到IDE后，IDE对代码提出了一个警告：不可到达的代码：11</p>
+<p>随后我们对If中的条件进行修改（解决问题2和3）</p>
+<p>运行测试之后发现其对于0-9之间的字符输入能够完成符合要求的输出，随后对其他字符测试出现错误输出Zero（预期输出：Other）</p>
+<p>于是我们在第八行打点进行单步调试观察变量数值。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/12641858/1731143857386-752e0f81-3110-48ce-bb96-865ec867c395.png" srcset="/img/loading.gif" lazyload></p>
+<p>在输入0-9的时候，变量i能够正确赋值并执行下一步操作，最后输出符合要求。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/12641858/1731143857621-7b960fa6-19de-44b8-aa60-6c8802996fab.png" srcset="/img/loading.gif" lazyload></p>
+<p>当输入其他字符（此处为‘a’）时，变量i赋值为0。此时，我们发现由于变量定义为整型（int）所以只能够储存数字，因此我们将其改为字符变量（char），并对代码进行相关调整，进行调试之后发现能够正常赋值。（解决问题1）<img src="https://cdn.nlark.com/yuque/0/2024/png/12641858/1731143857888-7aeb6f81-bf2f-44e0-83cd-50b61e3a5307.png" srcset="/img/loading.gif" lazyload></p>
+<p>至此，我们完成了对这一段代码的debug任务。我们发现单步调试能帮助开发者通过逐步跟踪代码执行、观察变量变化、设置断点等手段，快速精确定位问题所在，深入理解代码逻辑，高效解决并预防错误，从而提升开发效率和质量。</p>
+<h2 id="cLCK8">（3）通过AI查错纠错</h2>
+在软件开发和编程的复杂环境中，错误和漏洞的及时发现与修复是确保软件质量和用户体验的关键。传统的代码审查和测试方法虽然有效，但往往受限于人力资源和时间成本。为了应对这一挑战，越来越多的开发者开始引入AI查错技术，利用人工智能的智能化和自动化优势，提升代码审查的效率和准确性。因此，我们使用了几款功能十分强大的Ai来进行同一个项目的纠错。
+
+<h4 id="O8uIw">Cursor（依于Claude3.5）</h4>
+作为目前互联网上近期十分热门的代码大模型，我们对其进行测试。
+
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/12641858/1731143858128-9dd9fbd0-959d-4462-a6f6-b560a2890c4c.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<ol>
+<li>原代码中的条件判断 if(i&gt;0||i&lt;&#x3D;9) 是错误的：使用 OR (||) 运算符会导致条件永远为真，因为任何数要么大于0，要么小于等于9。应该使用 AND (&amp;&amp;) 运算符来确保数字在0到9的范围内</li>
+<li>条件判断中还需要包含0：原条件 i&gt;0 排除了0。应改为 i&gt;&#x3D;0 以包含0</li>
+<li>由于题目要求输入的是字符，建议将代码进一步优化为处理字符输入。</li>
+</ol>
+</blockquote>
+<h4 id="V2yEF">Cursor（依于Chatgpt-4o）</h4>
+![](https://cdn.nlark.com/yuque/0/2024/png/12641858/1731143858344-7a4f92a6-f753-4d7f-adb2-c22face8abce.png)
+
+<blockquote>
+<p><strong>输入类型</strong>：原代码中使用了int i来接收输入，但题目要求输入一个字符，因此应使用char ch。</p>
+<p><strong>条件判断</strong>：原代码中的条件if(i&gt;0||i&lt;&#x3D;9)逻辑不正确。应检查字符是否在’0’到’9’之间，即if (ch &gt;&#x3D; ‘0’ &amp;&amp; ch &lt;&#x3D; ‘9’)。</p>
+<p><strong>数组索引</strong>：在输出数字对应的英文单词时，使用num[ch - ‘0’]来将字符转换为对应的整数索引。</p>
+</blockquote>
+<p>相同的是，两款语言模型在cursor的环境之下已经能够完成对这一段代码的错误分析，并作出改正。</p>
+<h4 id="RspLe">通义灵码</h4>
+作为阿里巴巴专为编程开发的大模型工具，我们使用相同题目进行测试。![](https://cdn.nlark.com/yuque/0/2024/png/12641858/1731143858585-4decc06a-15aa-4a39-9cc2-d560582bfd35.png)
+
+<blockquote>
+<p><strong>输入类型错误：</strong>当前代码中，i 被定义为 int 类型，而题目要求输入的是一个字符。因此，应该将 i 改为 char 类型。</p>
+<p><strong>条件判断错误：</strong>当前的条件判断 if(i&gt;0||i&lt;&#x3D;9) 是不正确的。应该检查输入的字符是否在 ‘0’ 到 ‘9’ 之间。</p>
+<p><strong>数组索引计算：</strong>输入的字符需要转换为对应的整数索引，才能正确访问 num 数组。可以使用 i - ‘0’ 来实现这一点。</p>
+<p><strong>代码优化：</strong>可以使用 switch 语句来简化代码，但这里我们保持使用 if 语句。</p>
+</blockquote>
+<h4 id="wkLVe">豆包MarsCode</h4>
+字节跳动也对编程开发了大模型MarsCode，我们采用同样的测试方式。
+
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/12641858/1731143858811-7be39f35-154c-4dc0-bc75-a4b21df1fb7d.png" srcset="/img/loading.gif" lazyload></p>
+<blockquote>
+<p>主要问题出现在条件判断语句 if(i&gt;0||i&lt;&#x3D;9) 上。这个条件判断语句并没有正确地涵盖所有可能的数字字符范围。</p>
+<p>此外，在输出时直接使用了整数 i 作为数组的索引，这可能会导致运行时错误。</p>
+</blockquote>
+<h2 id="EPFus">（4）错误原因及修改方案总结</h2>
+<h3 id="i1Tgx">错误原因：</h3>
+1. 变量类型错误：代码错误的将输入数据存储的变量类型定义为整数（int）而忽略了其他字符输入的可能性。
+2. 条件判断错误：If语句中的逻辑运算错误的使用了或运算（||），从而使得if语句的执行错误。
+3. 比较符号错误：在0到9的条件中，左侧的0错误使用了大于号，使得等于0这一情况被忽略。
+
+<h3 id="kZJxE">修改方案：</h3>
+1. 更换变量类型（int）为字符型（char）
+2. 将或运算（||）改为与运算（&&）
+3. 将大于（>）改为大于等于(>=)
+
+<p>修改后代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">char</span> i;<br>    cin&gt;&gt;i;<br>    string num[]=&#123;<span class="hljs-string">&quot;Zero&quot;</span>,<span class="hljs-string">&quot;One&quot;</span>,<span class="hljs-string">&quot;Two&quot;</span>,<span class="hljs-string">&quot;Three&quot;</span>,<span class="hljs-string">&quot;Four&quot;</span>,<span class="hljs-string">&quot;Five&quot;</span>,<span class="hljs-string">&quot;Six&quot;</span>,<span class="hljs-string">&quot;Seven&quot;</span>,<span class="hljs-string">&quot;Eight&quot;</span>,<span class="hljs-string">&quot;Nine&quot;</span>&#125;;<br>    <span class="hljs-keyword">if</span>(i&gt;=<span class="hljs-string">&#x27;0&#x27;</span>&amp;&amp;i&lt;=<span class="hljs-string">&#x27;9&#x27;</span>)<br>        cout&lt;&lt;num[i -<span class="hljs-string">&#x27;0&#x27;</span>];<br>    <span class="hljs-keyword">else</span><br>        cout&lt;&lt;<span class="hljs-string">&quot;Other&quot;</span>;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="WhO8N">(5)两种方案比较</h2>
+<h3 id="lL1Gy">1.通过编译器和单步调试进行debug操作</h3>
+编译器能够初步对一些简单的逻辑问题和语法问题进行指出，可以一定程度上减少代码出现问题
+
+<p>在使用单步调试的时候，我们能够清楚直观了解到变量的变化情况，以及相关运算过程，来确定运算期间出现的错误，从而定位错误点然后做出改正。</p>
+<h3 id="DTZAX">2.使用ai来进行查错纠错</h3>
+AI能够快速且准确地扫描和分析大量代码，识别出潜在的错误和漏洞，从而显著提高查错效率，减少开发人员的等待时间。同时，借助先进的机器学习和深度学习技术，AI能够更深入地理解和分析代码的语法、语义和逻辑结构，进一步增强查错的准确性，减少误报和漏报的情况。
+
+<p>此外，AI还能根据错误类型和上下文信息，提供智能化的修复建议，帮助开发人员更快地定位和解决问题，降低手动修复的时间和成本。通过将AI查错集成到开发流程中，可以实现自动化的代码审查和测试，优化开发流程，提高整体开发效率。最重要的是，AI查错有助于开发人员编写出更高质量、更可靠、更安全的代码，降低人力成本，使开发人员能够将更多的时间和精力投入到创新和优化工作中。</p>
+<h3 id="w7Br4">3.两者进行比较</h3>
+
+
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>AI纠错</th>
+<th>人工纠错</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>速度</td>
+<td>通常速度较快，能够在几秒钟内分析代码并提供建议。适合快速发现常见错误。</td>
+<td>速度较慢，尤其是在复杂问题上，需要逐步分析和测试代码。</td>
+</tr>
+<tr>
+<td>准确性</td>
+<td>在常见错误和模式识别上准确性较高，但在复杂逻辑或特定业务场景下可能不如人工。</td>
+<td>准确性依赖于开发者的经验和对代码的理解，通常在复杂问题上更具优势。</td>
+</tr>
+<tr>
+<td>学习和适应能力</td>
+<td>可以通过训练数据不断提高，但需要大量数据和时间来适应新技术或语言。</td>
+<td>开发者可以通过学习和经验积累快速适应新技术和语言。</td>
+</tr>
+<tr>
+<td>成本</td>
+<td>初始成本可能较高（如购买或订阅AI工具），但长期使用成本较低。</td>
+<td>需要投入人力成本，尤其是在复杂项目中。</td>
+</tr>
+<tr>
+<td>用户体验</td>
+<td>提供即时反馈，用户体验较好，但可能缺乏详细解释。</td>
+<td>提供详细的分析和解释，但需要更多时间和精力。</td>
+</tr>
+<tr>
+<td>复杂问题处理</td>
+<td>在处理简单和中等复杂度的问题时表现良好，但在复杂问题上可能力不从心。</td>
+<td>能够深入理解和解决复杂问题，特别是在涉及业务逻辑的情况下。</td>
+</tr>
+<tr>
+<td>创新和创造力</td>
+<td>主要依赖于已有的数据和模式，创新能力有限。</td>
+<td>开发者可以通过创造性思维找到新的解决方案。</td>
+</tr>
+</tbody></table>
+<p>综上所述，AI纠错和人工debug各有优劣，通常可以结合使用以达到最佳效果。AI可以用于快速识别和修复常见问题，而人工debug则适合处理复杂和特定的问题。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1/" class="category-chain-item">程序设计</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/C/" class="print-no-link">#C++</a>
+      
+        <a href="/tags/Note/" class="print-no-link">#Note</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>程序设计Debug作业</div>
+      <div>http://me.broccoli.me/2024/11/24/Debug_Homework/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Junxiang</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年11月24日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/11/29/Markdown%E4%BD%BF%E7%94%A8%E6%95%99%E5%AD%A6/" title="Makdown的使用方法">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Makdown的使用方法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({"theme":"default"});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a>Broccoli Github Page</a> <i class="iconfont icon-love"></i> <a>Based on</a> <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <a>&</a> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
